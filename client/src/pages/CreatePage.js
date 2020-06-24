@@ -5,6 +5,7 @@ import {useHistory} from 'react-router-dom'
 
 export const CreatePage = () => {
   const history = useHistory()
+//В хедерах необхідно відправляти той ТОКЕН з яким ми зараз працюємо для цього імпортуємо контекст
   const auth = useContext(AuthContext)
   const {request} = useHttp()
   const [link, setLink] = useState('')
@@ -17,6 +18,9 @@ export const CreatePage = () => {
     if (event.key === 'Enter') {
       try {
         const data = await request('/api/link/generate', 'POST', {from: link}, {
+//Без цього хедера буде видавати помилку що ми не авторизовані бо в 
+//хедерах необхідно відправляти той ТОКЕН з яким ми зараз працюємо
+//Тому 4-тим параметром додаємо хедером - ТОКЕН який зберігається в auth додаємо як хедер
           Authorization: `Bearer ${auth.token}`
         })
         history.push(`/detail/${data.link._id}`)

@@ -4,11 +4,24 @@
   "description": "Mern stack",
   "main": "app.js",
   "scripts": {
+//cross-env NODE_ENV=development - з бібліотекою cross-env - ми можемо додвати системні змінні
+//для різних платформ на Ubuntu команда для добавлення змінних - export але 
+//cross-env самостійно визначає яка платформа і додає ці зміни нам.
+//NODE_ENV=production - вказує що змінна NODE_ENV - знаходиться в значенні production
     "start": "cross-env NODE_ENV=production node app.js",
+//Скріпт що запускає наш код в development режимі
     "server": "nodemon app.js",
+//Запускаєм фронтенд з папки client та оскільки package.json фронтенда знаходиться в папці client то
+// вказуєм префікс: '--prefix client' - як шлях до файлу package.json
     "client": "npm run start --prefix client",
+//"client:install" - буде загружати проект(це потрібно для хостингу)
     "client:install": "npm install --prefix client",
+//"client:install" - буде збирати проект(це потрібно для хостингу)
     "client:build": "npm run build --prefix client",
+//свойство dev дозволить за допомогою пакету concurrently запускати нащ додаток і для React і для Server
+//cross-env NODE_ENV=development - з бібліотекою cross-env - ми можемо додвати системні змінні
+//для різних платформ
+//NODE_ENV=development - вказує що змінна NODE_ENV - знаходиться в значенні development
     "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [
@@ -23,6 +36,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.3.0",
     "jsonwebtoken": "^8.5.1",
+//mongose відповідає за зєднання з базою і для роботи з mongodb
     "mongoose": "^5.8.1",
     "shortid": "^2.2.15"
   },

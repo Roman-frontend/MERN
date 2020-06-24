@@ -21,6 +21,8 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+//"proxy" - Вказує що будь які запити з фронтенда ми проксуємо(тобто 
+//відправляємо) на - "http://localhost:5000" - в режимі production "proxy" не працюватиме
   "proxy": "http://localhost:5000",
   "browserslist": {
     "production": [

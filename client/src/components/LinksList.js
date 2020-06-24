@@ -1,3 +1,4 @@
+//Це компонент для відображення силок
 import React from 'react'
 import {Link} from 'react-router-dom'
 

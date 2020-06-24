@@ -3,12 +3,16 @@ import {NavLink, useHistory} from 'react-router-dom'
 import {AuthContext} from '../context/AuthContext'
 
 export const Navbar = () => {
+//За допомогою useHistory() - будемо робити навігацію
   const history = useHistory()
+//Імпортємо заданий контекст з папки context файлу AuthContext.js
   const auth = useContext(AuthContext)
 
   const logoutHandler = event => {
+//Відміняємо дефолтну(по замовчуванні) поведінку щоб силка не оброблялася
     event.preventDefault()
     auth.logout()
+//(при виклику logoutHandler відбудеться перехід на головну сторінку - як я зрозумів)
     history.push('/')
   }
 

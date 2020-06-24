@@ -1,6 +1,9 @@
+/* Підключаєм модифіковану версію materialize */
 @import "~materialize-css/dist/css/materialize.min.css";
 
 
+/*Оскільки ми завантажили стилі з materialize то щоб в деяких місцях змінити їх то задаємо їх в 
+коді безпосередньо і щоб вказати який стиль в пріоритеті як кінцеве значення вказуєм !important*/
 input.yellow-input {
   border-bottom: 1px solid #fff!important;
   box-shadow: 0 1px 0 0 #fff!important;
