@@ -1,15 +1,9 @@
-import {useCallback} from 'react'
+import { useCallback } from "react";
 
-//Хук який виводитиме і очищатиме помилки 
 export const useMessage = () => {
-//застосовую хук useCallback - щоб Реакт не входив в циклічну рекурсію
-  return useCallback(text => {
-//Якщо в обєкті window обєкт M(Матеріалайз) існує і нам передано text то
+  return useCallback((text) => {
     if (window.M && text) {
-//В бібліотеці Матеріалайз доступний метод 
-//.toast() який виводить повідомлення в вікні яке задаю в () де перший параметр - ключ html: (
-//мабуть встроєний метод) а другий параметр повідомлення)
-      window.M.toast({ html: text })
+      window.M.toast({ html: text });
     }
-  }, [])
-}
+  }, []);
+};

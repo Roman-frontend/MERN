@@ -1,11 +1,7 @@
-//В цьому файлі ми зберігаємо константи для даного проекта
 {
-//Порт сервера буде зі значенням 5000 який використовуємо в app.js як listener
-  "port": 5000,
-//Секретний код (в даному випадку будь яке речення - головне щоб воно було дійсно секретним) який використовується для авторизації в auth.routes.js
-  "jwtSecret": "vladilen youtube mern",
-//URL адреса за якою ми додаємо базу даних зі значенням connection string яку скопіював з Connect to Cluster0 при створенні проекту на mongodb
-//де замість паролю після фрази "Roman:" відразу пишу пароль який задав при створення бази і після "net/" пишу app(може тут вказую назву node файлу)
-  "mongoUri": "mongodb+srv://Roman:Romae211@cluster0-1mktl.azure.mongodb.net/app?retryWrites=true&w=majority",
-  "baseUrl": "http://localhost:5000"
+  "port": 5001,
+  "jwtAccessSecret": "Test Access Secret",
+  "jwtRefreshSecret": "Test Refresh Secret",
+  "mongoUri": "mongodb+srv://Roman:Roman@cluster0.vbepk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "baseUrl": "http://localhost:5001"
 }

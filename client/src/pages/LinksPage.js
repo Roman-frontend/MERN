@@ -1,40 +1,39 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react'
-import {useHttp} from '../hooks/http.hook'
-import {AuthContext} from '../context/AuthContext'
-import {Loader} from '../components/Loader'
-import {LinksList} from '../components/LinksList'
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useHttp } from "../hooks/http.hook";
+import { AuthContext } from "../context/AuthContext";
+import { Loader } from "../components/Loader";
+import { LinksList } from "../components/LinksList";
+import { useAppDispatch } from "../hooks/redux";
+import {
+  directMessageSlice,
+  getDMs,
+  test,
+} from "../Redux/reducers/directMessageReducer";
 
 export const LinksPage = () => {
-//тут ми будемо працювати з силками тому useState() - з пустим масивом []
-  const [links, setLinks] = useState([])
-  const {loading, request} = useHttp()
-  const {token} = useContext(AuthContext)
+  const [links, setLinks] = useState([]);
+  const { loading, request } = useHttp();
+  const { token } = useContext(AuthContext);
+  const { test } = directMessageSlice.actions;
+  const dispatch = useAppDispatch();
 
   const fetchLinks = useCallback(async () => {
     try {
-//Цим запитом я отримую силки з '/api/link' токену `Bearer ${token}`
-      const fetched = await request('/api/link', 'GET', null, {
-        Authorization: `Bearer ${token}`
-      })
-//Коли силки загрузяться то поміщаємо їх в локальний стан - links
-      setLinks(fetched)
+      const fetched = await request("/api/link", "GET", null, {
+        Authorization: `Bearer ${token}`,
+      });
+      setLinks(fetched);
     } catch (e) {}
-  }, [token, request])
+  }, [token, request]);
 
   useEffect(() => {
-    fetchLinks()
-  }, [fetchLinks])
+    //fetchLinks();
+    dispatch(getDMs());
+  }, [fetchLinks]);
 
-//Якщо ще не виконалась загрузка з сервера то loading = true і показуєм <Loader/> 
-//Коли загрузка request() - виконається то loading = false і виконається return
   if (loading) {
-    return <Loader/>
+    return <Loader />;
   }
 
-  return (
-    <>
-//loading = false -> віддаємо в <LinksList /> список силок які передаєм як links={links} 
-      {!loading && <LinksList links={links} />}
-    </>
-  )
-}
+  return <>{!loading && <LinksList links={links} />}</>;
+};
