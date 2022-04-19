@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { MouseEvent, useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
@@ -6,7 +6,7 @@ export const Navbar = () => {
   const history = useHistory();
   const auth = useContext(AuthContext);
 
-  const logoutHandler = (event) => {
+  const logoutHandler = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
     auth.logout();
     history.push("/");
@@ -21,7 +21,13 @@ export const Navbar = () => {
             <NavLink to="/create">Создать</NavLink>
           </li>
           <li>
-            <NavLink to="/links">Ссылки</NavLink>
+            <NavLink to="/links/fetch">Fetch</NavLink>
+          </li>
+          <li>
+            <NavLink to="/links/create-async-thunk">Create async thunk</NavLink>
+          </li>
+          <li>
+            <NavLink to="/links/RTK">RTK</NavLink>
           </li>
           <li>
             <a href="/" onClick={logoutHandler}>

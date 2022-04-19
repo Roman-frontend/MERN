@@ -10,10 +10,25 @@ import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "./Redux";
 import "materialize-css";
 
+interface IContext {
+  token: null | string;
+  userId: null | string;
+  login: (jwtToken: string, id: string) => void;
+  logout: () => void;
+  isAuthenticated: boolean;
+}
+
 function App() {
   const { token, login, logout, userId, ready } = useAuth();
-  const isAuthenticated = !!token;
+  const isAuthenticated: boolean = !!token;
   const routes = useRoutes(isAuthenticated);
+  const contextValue: IContext = {
+    token,
+    login,
+    logout,
+    userId,
+    isAuthenticated,
+  };
 
   if (!ready) {
     return <Loader />;
@@ -21,22 +36,14 @@ function App() {
 
   return (
     <Provider store={store}>
-      <PersistGate loading={<Loader />} persistor={persistor}>
-        <AuthContext.Provider
-          value={{
-            token,
-            login,
-            logout,
-            userId,
-            isAuthenticated,
-          }}
-        >
-          <Router>
-            {isAuthenticated && <Navbar />}
-            <div className="container">{routes}</div>
-          </Router>
-        </AuthContext.Provider>
-      </PersistGate>
+      <AuthContext.Provider value={contextValue}>
+        <Router>
+          {isAuthenticated && <Navbar />}
+          <div style={{ width: "95%" }} className="container">
+            {routes}
+          </div>
+        </Router>
+      </AuthContext.Provider>
     </Provider>
   );
 }

@@ -1,31 +1,34 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { KeyboardEvent, useContext, useEffect, useState } from "react";
 import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export const CreatePage = () => {
   const history = useHistory();
-  const auth = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const { request } = useHttp();
   const [link, setLink] = useState("");
 
   useEffect(() => {
-    window.M.updateTextFields();
+    (window as any).M.updateTextFields();
   }, []);
 
-  const pressHandler = async (event) => {
+  const pressHandler = async (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       try {
+        console.log(token);
         const data = await request(
           "/api/link/generate",
           "POST",
           { from: link },
           {
-            Authorization: `Bearer ${auth.token}`,
+            Authorization: `Bearer ${token}`,
           }
         );
         history.push(`/detail/${data.link._id}`);
-      } catch (e) {}
+      } catch (e) {
+        console.log("error in createLink... ", e);
+      }
     }
   };
 

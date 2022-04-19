@@ -3,39 +3,25 @@ import {
   configureStore,
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
-import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  persistReducer,
-  persistStore,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-} from "redux-persist";
-import directMessageSlice from "./reducers/directMessageReducer";
+import { persistStore } from "redux-persist";
+import { postAPI } from "../services/LinkService";
+import linkReducer from "./reducers/linkReducer";
 
 const rootReducer = combineReducers({
-  dMReducer: directMessageSlice,
+  linkReducer,
+  // Як ключ редюсеру вказуємо унікальний ключ який ми записували
+  // Як значення додаємо сам middleware який лежить в - postAPI.reducer
+  [postAPI.reducerPath]: postAPI.reducer,
 });
-
-const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["directMessageReducer"],
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const setupStore = () => {
   return configureStore({
-    reducer: persistedReducer,
-    middleware: getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+      // getDefaultMiddleware дозвляє отримати дефолтний middleware які вже підключені до redux/toolkit, наприклад по замовчуванні там іде redux-thunk і з допомгою concat додаємо туди наш middleware що отримуємо з нашого postAPI
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }).concat(postAPI.middleware),
   });
 };
 

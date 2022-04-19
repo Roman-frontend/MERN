@@ -1,6 +1,7 @@
 import React from "react";
+import { ICreatePayload } from "../models/ILinkReducer";
 
-export const LinkCard = ({ link }) => {
+export const LinkCard = ({ link }: ICreatePayload) => {
   return (
     <>
       <h2>Ссылка</h2>
@@ -11,15 +12,18 @@ export const LinkCard = ({ link }) => {
           {link.to}
         </a>
       </p>
+
       <p>
-        Откуда:{" "}
+        Название:{" "}
         <a href={link.from} target="_blank" rel="noopener noreferrer">
           {link.from}
         </a>
       </p>
+
       <p>
         Количество кликов по ссылке: <strong>{link.clicks}</strong>
       </p>
+
       <p>
         Дата создания:{" "}
         <strong>{new Date(link.date).toLocaleDateString()}</strong>

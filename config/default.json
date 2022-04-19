@@ -1,7 +1,7 @@
 {
-  "port": 5001,
+  "port": 5002,
   "jwtAccessSecret": "Test Access Secret",
   "jwtRefreshSecret": "Test Refresh Secret",
   "mongoUri": "mongodb+srv://Roman:Roman@cluster0.vbepk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  "baseUrl": "http://localhost:5001"
+  "baseUrl": "http://localhost:5002"
 }

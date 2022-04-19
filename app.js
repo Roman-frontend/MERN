@@ -2,8 +2,11 @@ const express = require("express");
 const config = require("config");
 const path = require("path");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json({ extended: true }));
 app.use("/api/auth", require("./routes/auth.routes.js"));
@@ -18,7 +21,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const PORT = config.get("port") || 5001;
+const PORT = config.get("port") || 5002;
 
 async function start() {
   try {

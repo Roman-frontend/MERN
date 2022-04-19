@@ -1,22 +1,35 @@
 import { useState, useCallback } from "react";
 
+interface IHeaders {
+  ["Content-Type"]?: string;
+  Authorization?: string;
+}
+
 export const useHttp = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<null | string>(null);
 
   const request = useCallback(
-    async (url, method = "GET", body = null, headers = {}) => {
+    async (
+      url: string,
+      method = "GET",
+      body: any = null,
+      headers: IHeaders = {}
+    ) => {
       setLoading(true);
+
       try {
         if (body) {
-          /**передаємо body на сервер як строку а не обєкт */
           body = JSON.stringify(body);
-          /**Щоб на сервері пирйняти json */
           headers["Content-Type"] = "application/json";
         }
 
         console.log("http req ", url, { method, body, headers });
-        const response = await fetch(url, { method, body, headers });
+        const response = await fetch(`http://localhost:5002${url}`, {
+          method,
+          body,
+          headers,
+        });
         const data = await response.json();
 
         if (!response.ok) {
@@ -28,7 +41,16 @@ export const useHttp = () => {
         return data;
       } catch (e) {
         setLoading(false);
-        setError(e.message);
+        if (
+          e &&
+          typeof e === "object" &&
+          e.hasOwnProperty("message") &&
+          e.message
+        ) {
+          setError(e.message);
+        } else {
+          setError(e);
+        }
         throw e;
       }
     },
