@@ -1,11 +1,13 @@
 import { createContext } from "react";
 
-function noop() {}
+function login(jwtToken: string, id: string) {}
+
+function logout() {}
 
 export const AuthContext = createContext({
   token: null,
   userId: null,
-  login: noop,
-  logout: noop,
+  login,
+  logout,
   isAuthenticated: false,
 });

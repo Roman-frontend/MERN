@@ -8,7 +8,7 @@ import {
 
 export const getLinks = createAsyncThunk(
   "links/getLinks",
-  async (params: { token: string | null }, { rejectWithValue, dispatch }) => {
+  async (params: { token: string | null }, { rejectWithValue }) => {
     try {
       const response = await fetch("http://localhost:5002/api/link", {
         method: "GET",
@@ -24,7 +24,6 @@ export const getLinks = createAsyncThunk(
 
       const data: ILink[] = await response.json();
 
-      //dispatch(addDirectMessage(record));
       return data;
     } catch (error) {
       console.log(error);

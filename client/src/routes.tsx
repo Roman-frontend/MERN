@@ -5,6 +5,7 @@ import { LinksPageCreateAsyncThunk } from "./pages/LinksPageCreateAsyncThunk";
 import { LinksPageRTK } from "./pages/LinksPageRTK";
 import { CreatePage } from "./pages/CreatePage";
 import { DetailPage } from "./pages/DetailPage";
+import { LinksPageJsonServer } from "./pages/LinksPageJsonServer";
 import { AuthPage } from "./pages/AuthPage";
 
 export const useRoutes = (isAuthenticated: boolean) => {
@@ -19,6 +20,9 @@ export const useRoutes = (isAuthenticated: boolean) => {
         </Route>
         <Route path="/links/RTK" exact>
           <LinksPageRTK />
+        </Route>
+        <Route path="/links/json-server">
+          <LinksPageJsonServer />
         </Route>
         <Route path="/create" exact>
           <CreatePage />

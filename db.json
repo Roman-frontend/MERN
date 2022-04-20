@@ -1,0 +1,112 @@
+{
+  "links": [
+    {
+      "clicks": 0,
+      "code": "fLOaMNWNH",
+      "date": "2022-04-19T14:03:02.058Z",
+      "from": "_00_",
+      "owner": "625de078bcf9d26ee78895e8",
+      "to": "http://localhost:5002/t/fLOaMNWNH",
+      "__v": 0,
+      "_id": "625ec116a50af58246956838"
+    },
+    {
+      "clicks": 0,
+      "code": "wEAZ03Jrx",
+      "date": "2022-04-19T20:55:27.780Z",
+      "from": "*L*",
+      "owner": "625de078bcf9d26ee78895e8",
+      "to": "http://localhost:5002/t/wEAZ03Jrx",
+      "__v": 0,
+      "_id": "625f21bf201063aedfd47521"
+    },
+    {
+      "clicks": 0,
+      "code": "ZXrPc4A31",
+      "date": "2022-04-19T23:25:33.253Z",
+      "from": "OoO",
+      "owner": "625de078bcf9d26ee78895e8",
+      "to": "http://localhost:5002/t/ZXrPc4A31",
+      "__v": 0,
+      "_id": "625f44edb1636d1f855e7006"
+    },
+    {
+      "clicks": 0,
+      "code": "8yCAyrAbt",
+      "date": "2022-04-20T10:24:25.656Z",
+      "from": "#\"_\"#",
+      "owner": "625de078bcf9d26ee78895e8",
+      "to": "http://localhost:5002/t/8yCAyrAbt",
+      "__v": 0,
+      "_id": "625fdf593aebe618e934349c"
+    },
+    {
+      "clicks": 0,
+      "code": "gtew1x30J",
+      "date": "2022-04-20T10:25:01.791Z",
+      "from": "*~|===|~*",
+      "owner": "625de078bcf9d26ee78895e8",
+      "to": "http://localhost:5002/t/gtew1x30J",
+      "__v": 0,
+      "_id": "625fdf7d3aebe618e934349f"
+    },
+    {
+      "clicks": 0,
+      "code": "fLOaMNWNH",
+      "date": "2022-04-19T14:03:02.058Z",
+      "from": "json-server",
+      "owner": "625de078bcf9d26ee78895e8",
+      "to": "http://localhost:5002/t/fLOaMNWNH",
+      "__v": 0,
+      "_id": "0.14846222968646194",
+      "id": "0.14846222968646194"
+    },
+    {
+      "clicks": 0,
+      "code": "fLOaMNWNH",
+      "date": "2022-04-19T14:03:02.058Z",
+      "from": "Cool link",
+      "owner": "625de078bcf9d26ee78895e8",
+      "to": "http://localhost:5002/t/fLOaMNWNH",
+      "__v": 0,
+      "_id": "0.1237258813911053",
+      "id": "0.1237258813911053"
+    },
+    {
+      "clicks": 0,
+      "code": "fLOaMNWNH",
+      "date": "2022-04-19T14:03:02.058Z",
+      "from": "My link",
+      "owner": "625de078bcf9d26ee78895e8",
+      "to": "http://localhost:5002/t/fLOaMNWNH",
+      "__v": 0,
+      "_id": "0.804057331638504",
+      "id": "0.804057331638504"
+    },
+    {
+      "clicks": 0,
+      "code": "fLOaMNWNH",
+      "date": "2022-04-19T14:03:02.058Z",
+      "from": "Look",
+      "owner": "625de078bcf9d26ee78895e8",
+      "to": "http://localhost:5002/t/fLOaMNWNH",
+      "__v": 0,
+      "_id": "0.07344457540585014",
+      "id": "0.07344457540585014"
+    },
+    {
+      "clicks": 0,
+      "code": "fLOaMNWNH",
+      "date": "2022-04-19T14:03:02.058Z",
+      "from": "Life happy",
+      "owner": "625de078bcf9d26ee78895e8",
+      "to": "http://localhost:5002/t/fLOaMNWNH",
+      "__v": 0,
+      "_id": "0.6583705505207105",
+      "id": "0.6583705505207105"
+    }
+  ],
+  "about": {
+    "title": "Сторінка про нас"
+  }
+}

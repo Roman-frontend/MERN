@@ -5,11 +5,15 @@ import { AuthContext } from "../context/AuthContext";
 import { Loader } from "../components/Loader";
 import { LinkCard } from "../components/LinkCard";
 
+interface ILinkId {
+  id: string;
+}
+
 export const DetailPage = () => {
   const { token } = useContext(AuthContext);
   const { request, loading } = useHttp();
   const [link, setLink] = useState(null);
-  const linkId = useParams().id;
+  const { id: linkId }: ILinkId = useParams();
 
   const getLink = useCallback(async () => {
     try {

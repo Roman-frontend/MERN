@@ -18,8 +18,6 @@ export const linkSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getLinks.pending.type]: (state, action) => {
-      // both `state` and `action` are now correctly typed
-      // based on the slice state and the `pending` action creator
       state.status = "loading";
       state.error = "";
     },
@@ -27,7 +25,7 @@ export const linkSlice = createSlice({
       state: IInitialState,
       action: PayloadAction<ILink[]>
     ) => {
-      state.status = "loading";
+      state.status = "succeeded";
       state.error = "";
       state.links = action.payload;
     },
@@ -38,7 +36,6 @@ export const linkSlice = createSlice({
       console.log("action... ", action.payload);
       state.status = "failed";
       state.error = action.payload.message;
-      //setError(state, action);
     },
     [createLink.pending.type]: (state, action) => {
       state.status = "loading";
@@ -48,7 +45,7 @@ export const linkSlice = createSlice({
       state: IInitialState,
       action: PayloadAction<ICreatePayload>
     ) => {
-      state.status = "loading";
+      state.status = "succeeded";
       state.error = "";
       state.links.push(action.payload.link);
     },
@@ -59,7 +56,6 @@ export const linkSlice = createSlice({
       console.log("action... ", action.payload);
       state.status = "failed";
       state.error = action.payload.message;
-      //setError(state, action);
     },
     [deleteLink.pending.type]: (state, action) => {
       state.status = "loading";
@@ -69,7 +65,7 @@ export const linkSlice = createSlice({
       state: IInitialState,
       action: PayloadAction<string>
     ) => {
-      state.status = "loading";
+      state.status = "succeeded";
       state.error = "";
       state.links = state.links.filter((link) => {
         console.log(action.payload);
@@ -92,7 +88,7 @@ export const linkSlice = createSlice({
       state: IInitialState,
       action: PayloadAction<{ id: string; from: string }>
     ) => {
-      state.status = "loading";
+      state.status = "succeeded";
       state.error = "";
       state.links = state.links.map((link) => {
         return link._id === action.payload.id
@@ -108,33 +104,6 @@ export const linkSlice = createSlice({
       state.error = action.payload.message;
     },
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(getLinks.pending, (state, action) => {
-  //       // both `state` and `action` are now correctly typed
-  //       // based on the slice state and the `pending` action creator
-  //       state.status = "loading";
-  //       state.error = "";
-  //     })
-  //     .addCase(
-  //       getLinks.fulfilled,
-  //       (state: IInitialState, action: PayloadAction<ILink[]>) => {
-  //         state.status = "loading";
-  //         state.error = "";
-  //         state.links = action.payload;
-  //       }
-  //     )
-  //     .addCase(
-  //       getLinks.rejected,
-  //       (state: IInitialState, action: PayloadAction<any>) => {
-  //         console.log("action... ", action);
-
-  //         setError(state, action);
-  //       }
-  //     );
-  // },
 });
-
-//const {addDirectMessage, removeDirectMessages, test} = linkSlice.actions;
 
 export default linkSlice.reducer;

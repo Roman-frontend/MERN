@@ -11,10 +11,6 @@ export const LinksPageRTK = () => {
     data: links,
     error,
     isLoading: getLoading,
-    //refetch - дозволяє відправити повторний запит на сервер.
-    refetch,
-    // useFetchAllPostsQuery - це автозгенерований хук що генеруються на основі тих endpoin які ми описували (в нашому випадку postAPI м.д.).
-    // Першим параметром useFetchAllPostsQuery приймає параметри що будуть використані в запиті, якщо таких немає то можна передати пусту строку - ''
   } = postAPI.useFetchAllPostsQuery({ limit: null, token });
 
   const {
@@ -32,7 +28,6 @@ export const LinksPageRTK = () => {
     try {
       const from = prompt("Введите имя");
       await createLink({ from, token });
-      //history.push(`/detail/${res.data.link._id}`);
     } catch (e) {
       console.log("error in RTK createLink... ", e);
     }
@@ -58,7 +53,10 @@ export const LinksPageRTK = () => {
 
   return (
     <>
-      {(error || limitedError) && <h2>{error || limitedError}</h2>}
+      {error && typeof error === "string" && <h2>{error}</h2>}
+      {limitedError && typeof limitedError === "string" && (
+        <h2>{limitedError}</h2>
+      )}
       <div style={{ display: "flex" }}>
         <div style={{ margin: "0px 10px" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>

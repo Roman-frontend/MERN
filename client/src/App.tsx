@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ProviderProps } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useRoutes } from "./routes";
 import { useAuth } from "./hooks/auth.hook";
@@ -6,8 +6,7 @@ import { AuthContext } from "./context/AuthContext";
 import { Navbar } from "./components/Navbar";
 import { Loader } from "./components/Loader";
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import store, { persistor } from "./Redux";
+import store from "./Redux-toolkit";
 import "materialize-css";
 
 interface IContext {
@@ -22,7 +21,7 @@ function App() {
   const { token, login, logout, userId, ready } = useAuth();
   const isAuthenticated: boolean = !!token;
   const routes = useRoutes(isAuthenticated);
-  const contextValue: IContext = {
+  const contextValue: IContext | any = {
     token,
     login,
     logout,

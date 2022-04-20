@@ -53,7 +53,10 @@ export const LinksPageFetch = () => {
 
       setLinks((prev: ILink[]) => {
         return prev.map((link) => {
-          return link._id === id ? { ...link, from } : link;
+          if (link._id === id && typeof from === "string") {
+            return { ...link, from };
+          }
+          return link;
         });
       });
     } catch (e) {

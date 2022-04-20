@@ -30,6 +30,9 @@ export const Navbar = () => {
             <NavLink to="/links/RTK">RTK</NavLink>
           </li>
           <li>
+            <NavLink to="/links/json-server">json-server</NavLink>
+          </li>
+          <li>
             <a href="/" onClick={logoutHandler}>
               Выйти
             </a>

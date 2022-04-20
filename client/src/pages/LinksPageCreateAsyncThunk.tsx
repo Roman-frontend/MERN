@@ -8,7 +8,7 @@ import {
   createLink,
   updateLink,
   deleteLink,
-} from "../Redux/reducers/ActionCreators";
+} from "../Redux-toolkit/reducers/ActionCreators";
 
 export const LinksPageCreateAsyncThunk = () => {
   const { token } = useContext(AuthContext);
@@ -36,6 +36,8 @@ export const LinksPageCreateAsyncThunk = () => {
     const from = prompt("Input name for change");
     dispatch(updateLink({ token, id, from }));
   };
+
+  console.log(links);
 
   if (linksLoading === "loading") {
     return <Loader />;

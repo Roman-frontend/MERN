@@ -1,20 +1,20 @@
 import { useState, useCallback } from "react";
 
-interface IHeaders {
-  ["Content-Type"]?: string;
-  Authorization?: string;
-}
+// interface IHeaders {
+//   ["Content-Type"]?: string;
+//   Authorization?: string;
+// }
 
 export const useHttp = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<null | string>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const request = useCallback(
     async (
       url: string,
       method = "GET",
       body: any = null,
-      headers: IHeaders = {}
+      headers: any = {}
     ) => {
       setLoading(true);
 
@@ -39,25 +39,19 @@ export const useHttp = () => {
         setLoading(false);
 
         return data;
-      } catch (e) {
+      } catch (e: any) {
+        console.log("e... ", e.message);
         setLoading(false);
-        if (
-          e &&
-          typeof e === "object" &&
-          e.hasOwnProperty("message") &&
-          e.message
-        ) {
-          setError(e.message);
-        } else {
-          setError(e);
-        }
+
+        setError(e.message);
+
         throw e;
       }
     },
     []
   );
 
-  const clearError = useCallback(() => setError(null), []);
+  const clearError = useCallback(() => setError(""), []);
 
   return { loading, request, error, clearError };
 };
