@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Progress = ({ percentage }) => {
+interface IProps {
+  percentage: number;
+}
+
+const Progress = ({ percentage }: IProps) => {
   return (
-    <div className="progress">
+    <div className="progress" style={{ height: 16 }}>
       <div
         className="progress-bar progress-bar-striped bg-success"
         role="progressbar"

@@ -1,5 +1,7 @@
 # Used libraryes: React, reduxjs/toolkit, Ts, Exprees, Mongoose, MongoDB, Bootstrap
 
+1. For file upload without reload page need folder of files create outside of client folder. In folder where not React components
+
 ## Getting started
 
 1. Install dependencies:

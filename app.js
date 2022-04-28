@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 
 app.use(express.json({ extended: true }));
-app.use(express.static(__dirname + "/client/public/uploads"));
+app.use(express.static(__dirname + "/uploads"));
 app.use(fileUpload({}));
 
 app.use("/api/auth", require("./routes/auth.routes.js"));

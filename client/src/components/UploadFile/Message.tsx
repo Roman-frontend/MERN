@@ -1,7 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Message = ({ msg }) => {
+interface IProps {
+  msg: string;
+}
+
+const Message = ({ msg }: IProps) => {
   return (
     <div className="alert alert-info alert-dismissible fade show" role="alert">
       {msg}

@@ -1,24 +1,35 @@
-import React, { Fragment, useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import Message from "../components/UploadFile/Message";
 import Progress from "../components/UploadFile/Progress";
 import axios from "axios";
+import ListPictures from "../components/UploadFile/ListPictures";
+
+interface IUploadedFile {
+  fileName?: string;
+  filePath?: string;
+}
 
 const FileUpload = () => {
-  const [file, setFile] = useState("");
-  const [filename, setFilename] = useState("Choose File");
-  const [uploadedFile, setUploadedFile] = useState({});
-  const [message, setMessage] = useState("");
-  const [uploadPercentage, setUploadPercentage] = useState(0);
+  const [file, setFile] = useState<File | string>("");
+  const [filename, setFilename] = useState<string>("Choose File");
+  const [uploadedFile, setUploadedFile] = useState<IUploadedFile>({});
+  const [message, setMessage] = useState<string>("");
+  const [uploadPercentage, setUploadPercentage] = useState<number>(0);
+  const [showListPictures, setShowListPictures] = useState<boolean>(false);
 
-  const onChange = (e) => {
-    setFile(e.target.files[0]);
-    setFilename(e.target.files[0].name);
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e && e.target.files) {
+      setFile(e.target.files[0]);
+      setFilename(e.target.files[0].name);
+    }
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
+
+    console.log("formData... ", formData);
 
     try {
       const res = await axios.post("/api/file/post", formData, {
@@ -27,22 +38,23 @@ const FileUpload = () => {
         },
         onUploadProgress: (progressEvent) => {
           setUploadPercentage(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
+            Math.round((progressEvent.loaded * 100) / progressEvent.total)
           );
         },
       });
 
-      // Clear percentage
       setTimeout(() => setUploadPercentage(0), 10000);
 
+      console.log("res.data => ", res.data);
       const { fileName, filePath } = res.data;
 
-      setUploadedFile({ fileName, filePath });
+      setUploadedFile({
+        fileName,
+        filePath,
+      });
 
       setMessage("File Uploaded");
-    } catch (err) {
+    } catch (err: any) {
       if (err.response.status === 500) {
         setMessage("There was a problem with the server");
       } else {
@@ -50,12 +62,14 @@ const FileUpload = () => {
       }
       setUploadPercentage(0);
     }
+
+    return false;
   };
 
   return (
     <div className="container mt-4">
       <h4 className="display-4 text-center mb-4">
-        <i className="fab fa-react" /> React File Upload
+        <i className="fab fa-react" />
       </h4>
       {message ? <Message msg={message} /> : null}
       <form onSubmit={onSubmit}>
@@ -79,14 +93,25 @@ const FileUpload = () => {
           className="btn btn-primary btn-block mt-4"
         />
       </form>
+      <button
+        className="btn btn-primary btn-block mt-4"
+        onClick={() => setShowListPictures(!showListPictures)}
+      >
+        {showListPictures ? "Hide list pictures" : "Show list pictures"}
+      </button>
       {uploadedFile ? (
         <div className="row mt-5">
           <div className="col-md-6 m-auto">
-            <h3 className="text-center">{uploadedFile.fileName}</h3>
-            <img style={{ width: "100%" }} src={uploadedFile.filePath} alt="" />
+            <img
+              style={{ width: 140, height: "auto" }}
+              src={uploadedFile.filePath}
+              alt=""
+            />
+            <a href={uploadedFile.filePath}>{uploadedFile.fileName}</a>
           </div>
         </div>
       ) : null}
+      {showListPictures && <ListPictures />}
     </div>
   );
 };
