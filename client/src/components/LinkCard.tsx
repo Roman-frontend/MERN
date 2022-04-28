@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { ICreatePayload } from "../models/ILinkReducer";
 
 export const LinkCard = ({ link }: ICreatePayload) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <h2>Ссылка</h2>
@@ -28,6 +31,9 @@ export const LinkCard = ({ link }: ICreatePayload) => {
         Дата создания:{" "}
         <strong>{new Date(link.date).toLocaleDateString()}</strong>
       </p>
+      <div>
+        <button onClick={() => navigate(-1)}>Go back</button>
+      </div>
     </>
   );
 };

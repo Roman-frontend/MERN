@@ -5,24 +5,20 @@ import { AuthContext } from "../context/AuthContext";
 import { Loader } from "../components/Loader";
 import { LinkCard } from "../components/LinkCard";
 
-interface ILinkId {
-  id: string;
-}
-
 export const DetailPage = () => {
   const { token } = useContext(AuthContext);
   const { request, loading } = useHttp();
   const [link, setLink] = useState(null);
-  const { id: linkId }: ILinkId = useParams();
+  const param = useParams();
 
   const getLink = useCallback(async () => {
     try {
-      const fetched = await request(`/api/link/${linkId}`, "GET", null, {
+      const fetched = await request(`/api/link/${param.id}`, "GET", null, {
         Authorization: `Bearer ${token}`,
       });
       setLink(fetched);
     } catch (e) {}
-  }, [token, linkId, request]);
+  }, [token, param, request]);
 
   useEffect(() => {
     getLink();

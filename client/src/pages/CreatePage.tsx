@@ -1,13 +1,14 @@
 import React, { KeyboardEvent, useContext, useEffect, useState } from "react";
 import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from "../context/AuthContext";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "./CreatePage.css";
 
 export const CreatePage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const { request } = useHttp();
-  const [link, setLink] = useState("");
+  const [link, setLink] = useState<string>("");
 
   useEffect(() => {
     (window as any).M.updateTextFields();
@@ -16,7 +17,7 @@ export const CreatePage = () => {
   const pressHandler = async (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       try {
-        console.log(token);
+        //console.log(file);
         const data = await request(
           "/api/link/generate",
           "POST",
@@ -25,7 +26,8 @@ export const CreatePage = () => {
             Authorization: `Bearer ${token}`,
           }
         );
-        history.push(`/detail/${data.link._id}`);
+        console.log("data => ", data);
+        navigate(`/detail/${data.link._id}`);
       } catch (e) {
         console.log("error in createLink... ", e);
       }
@@ -33,8 +35,8 @@ export const CreatePage = () => {
   };
 
   return (
-    <div className="row">
-      <div className="col s8 offset-s2" style={{ paddingTop: "2rem" }}>
+    <div className="row" style={{ display: "block" }}>
+      <div className="col s8 offset-s2" style={{ padding: "2rem 0rem" }}>
         <div className="input-field">
           <input
             placeholder="Вставьте ссылку"

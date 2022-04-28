@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 
 module.exports = (req, res, next) => {
+  //console.log("auth check token... ", req.headers);
+
   if (req.method === "OPTIONS") {
     return next();
   }
@@ -9,7 +11,7 @@ module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
 
-    console.log("token... ", token, config.get("jwtAccessSecret"));
+    //console.log("token... ", token, config.get("jwtAccessSecret"));
 
     if (!token) {
       return res.status(401).json({ message: "Нет авторизации" });
@@ -28,7 +30,7 @@ module.exports = (req, res, next) => {
       }
     );
 
-    console.log("decoded... ", decoded);
+    //console.log("decoded... ", decoded);
     req.user = decoded;
     next();
   } catch (e) {

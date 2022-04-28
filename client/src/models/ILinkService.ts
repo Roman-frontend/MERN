@@ -13,7 +13,7 @@ export interface IQueryParams extends IToken {
 }
 
 export interface IUpdateArgs extends IToken, IId {
-  name: string | null;
+  from: string | null;
 }
 
 export interface ICreateArgs extends IToken {

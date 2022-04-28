@@ -1,3 +1,5 @@
+# Used libraryes: React, reduxjs/toolkit, Ts, Exprees, Mongoose, MongoDB, Bootstrap
+
 ## Getting started
 
 1. Install dependencies:

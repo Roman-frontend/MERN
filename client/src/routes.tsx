@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { LinksPageFetch } from "./pages/LinksPageFetch";
 import { LinksPageCreateAsyncThunk } from "./pages/LinksPageCreateAsyncThunk";
 import { LinksPageRTK } from "./pages/LinksPageRTK";
@@ -7,40 +7,31 @@ import { CreatePage } from "./pages/CreatePage";
 import { DetailPage } from "./pages/DetailPage";
 import { LinksPageJsonServer } from "./pages/LinksPageJsonServer";
 import { AuthPage } from "./pages/AuthPage";
+import FileUpload from "./pages/FileUpload";
 
 export const useRoutes = (isAuthenticated: boolean) => {
   if (isAuthenticated) {
     return (
-      <Switch>
-        <Route path="/links/fetch" exact>
-          <LinksPageFetch />
-        </Route>
-        <Route path="/links/create-async-thunk" exact>
-          <LinksPageCreateAsyncThunk />
-        </Route>
-        <Route path="/links/RTK" exact>
-          <LinksPageRTK />
-        </Route>
-        <Route path="/links/json-server">
-          <LinksPageJsonServer />
-        </Route>
-        <Route path="/create" exact>
-          <CreatePage />
-        </Route>
-        <Route path="/detail/:id">
-          <DetailPage />
-        </Route>
-        <Redirect to="/create" />
-      </Switch>
+      <Routes>
+        <Route path="/create" element={<CreatePage />} />
+        <Route path="/file" element={<FileUpload />} />
+        <Route path="/links/fetch" element={<LinksPageFetch />} />
+        <Route
+          path="/links/create-async-thunk"
+          element={<LinksPageCreateAsyncThunk />}
+        />
+        <Route path="/links/RTK" element={<LinksPageRTK />} />
+        <Route path="/links/json-server" element={<LinksPageJsonServer />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="*" element={<CreatePage />} />
+      </Routes>
     );
   }
 
   return (
-    <Switch>
-      <Route path="/" exact>
-        <AuthPage />
-      </Route>
-      <Redirect to="/" />
-    </Switch>
+    <Routes>
+      <Route path="/" element={<AuthPage />} />
+      <Route path="/*" element={<AuthPage />} />
+    </Routes>
   );
 };

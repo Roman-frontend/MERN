@@ -15,7 +15,6 @@ export function LinksPageJsonServer() {
       axios
         .get("http://localhost:4200/links")
         .then((res) => {
-          console.log("response... ", res);
           setLinks(res.data);
         })
         .catch((error) => console.log("Some error... ", error));

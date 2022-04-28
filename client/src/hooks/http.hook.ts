@@ -20,7 +20,9 @@ export const useHttp = () => {
 
       try {
         if (body) {
+          console.log("body in request before stringify => ", body);
           body = JSON.stringify(body);
+          console.log("body in request => ", body);
           headers["Content-Type"] = "application/json";
         }
 

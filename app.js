@@ -3,14 +3,19 @@ const config = require("config");
 const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 
 const app = express();
 
 app.use(cors());
 
 app.use(express.json({ extended: true }));
+app.use(express.static(__dirname + "/client/public/uploads"));
+app.use(fileUpload({}));
+
 app.use("/api/auth", require("./routes/auth.routes.js"));
 app.use("/api/link", require("./routes/link.routes.js"));
+app.use("/api/file", require("./routes/file.routes.js"));
 app.use("/t", require("./routes/redirect.routes.js"));
 
 if (process.env.NODE_ENV === "production") {

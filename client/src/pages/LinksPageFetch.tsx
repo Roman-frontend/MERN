@@ -44,12 +44,14 @@ export const LinksPageFetch = () => {
   const handleUpdate = async (id: string) => {
     try {
       const from = prompt("Input changed name for fetch");
-      await request(
+      const a = await request(
         `/api/link/${id}`,
         "PUT",
         { from },
         { Authorization: `Bearer ${token}` }
       );
+
+      console.log("a => ", a);
 
       setLinks((prev: ILink[]) => {
         return prev.map((link) => {

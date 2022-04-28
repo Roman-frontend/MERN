@@ -13,12 +13,15 @@ export const postAPI = createApi({
   tagTypes: ["Link"],
   endpoints: (build) => ({
     fetchAllPosts: build.query<ILink[], IQueryParams>({
-      query: ({ limit, token }) => ({
-        url: `api/link?limit=${limit}`,
-        headers: {
-          ["authorization"]: `Bearer ${token}`,
-        },
-      }),
+      query: ({ limit, token }) => {
+        const checkedLimit = !!limit ? limit : 50;
+        return {
+          url: `api/link?limit=${checkedLimit}&direction=not-reverse`,
+          headers: {
+            ["authorization"]: `Bearer ${token}`,
+          },
+        };
+      },
       providesTags: (result) => ["Link"],
     }),
 
@@ -35,13 +38,13 @@ export const postAPI = createApi({
     }),
 
     updateLink: build.mutation<ILink, IUpdateArgs>({
-      query: ({ name, token, id }) => ({
+      query: ({ from, token, id }) => ({
         url: `api/link/${id}`,
         headers: {
           ["authorization"]: `Bearer ${token}`,
         },
         method: "PUT",
-        body: { name },
+        body: { from },
       }),
       invalidatesTags: ["Link"],
     }),

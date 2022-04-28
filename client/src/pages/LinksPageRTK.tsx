@@ -21,8 +21,8 @@ export const LinksPageRTK = () => {
 
   const [createLink, { isLoading: loadingCreate }] =
     postAPI.useCreateLinkMutation();
+  const [updateLink, {}] = postAPI.useUpdateLinkMutation();
   const [deleteLink, {}] = postAPI.useDeleteLinkMutation();
-  const [updatePost, {}] = postAPI.useUpdateLinkMutation();
 
   const handleCreateRTK = async () => {
     try {
@@ -38,13 +38,13 @@ export const LinksPageRTK = () => {
     setLimit(promptLimit);
   };
 
-  const handleRemoveRTK = (id: string) => {
-    deleteLink({ token, id });
+  const handleUpdate = (id: string) => {
+    const from = prompt("Input name for change with RTK");
+    updateLink({ from, token, id });
   };
 
-  const handleUpdate = (id: string) => {
-    const name = prompt("Input name for change with RTK");
-    updatePost({ name, token, id });
+  const handleRemoveRTK = (id: string) => {
+    deleteLink({ token, id });
   };
 
   if (loadingCreate) {

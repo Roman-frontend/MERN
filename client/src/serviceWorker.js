@@ -47,13 +47,13 @@ function registerValidSW(swUrl, config) {
                   "tabs for this page are closed. See https://bit.ly/CRA-PWA."
               );
 
-              if (config && config.onUpdate) {
+              if (config?.onUpdate) {
                 config.onUpdate(registration);
               }
             } else {
               console.log("Content is cached for offline use.");
 
-              if (config && config.onSuccess) {
+              if (config?.onSuccess) {
                 config.onSuccess(registration);
               }
             }

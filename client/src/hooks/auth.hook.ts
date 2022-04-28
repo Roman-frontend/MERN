@@ -30,7 +30,7 @@ export const useAuth = () => {
     const locSt: string | null = localStorage.getItem(storageName);
     const data = locSt ? JSON.parse(locSt) : null;
 
-    if (data && data.token) {
+    if (data?.token) {
       login(data.token, data.userId);
     }
     setReady(true);
